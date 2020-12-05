@@ -157,21 +157,23 @@ ENDIF()
 
 # ---- FIND ZLIB & LIBXML2 LIBS ---
 # TODO: finish this code, Notice we don't need it in 2019 with vs2015!
-SET(LIBXML2_LIBRARY_DEBUG BLAT)
-SET(LIBXML2_LIBRARY_RELEASE BLAT)
-SET(ZLIB_LIBRARY_DEBUG BLAT)
-SET(ZLIB_LIBRARY_RELEASE BLAT)
+#SET(LIBXML2_LIBRARY_DEBUG BLAT)
+#SET(LIBXML2_LIBRARY_RELEASE BLAT)
+#SET(ZLIB_LIBRARY_DEBUG BLAT)
+#SET(ZLIB_LIBRARY_RELEASE BLAT)
+
 #
 #        FIND_PACKAGE(LibXml2)
 #        MESSAGE(LIBXML2_LIBRARY=${LIBXML2_LIBRARY})
 
-#SET(FBX_ROOT "C:/Program Files/Autodesk/FBX/FBX SDK/2019.0")
+#TODO (Alice) had to uncomment those again, and comment the BLAT ones out
+SET(FBX_ROOT "C:/Program Files/Autodesk/FBX/FBX SDK/2020.0.1")
 ##setting libxml2 and zlib variables
-#SET(LIBXML2_LIBRARY_DEBUG ${FBX_ROOT}/lib/vs2015/x64/debug/libxml2-md.lib)
-#SET(LIBXML2_LIBRARY_RELEASE ${FBX_ROOT}/lib/vs2015/x64/release/libxml2-md.lib)
+SET(LIBXML2_LIBRARY_DEBUG ${FBX_ROOT}/lib/vs2017/x64/debug/libxml2-md.lib)
+SET(LIBXML2_LIBRARY_RELEASE ${FBX_ROOT}/lib/vs2017/x64/release/libxml2-md.lib)
 #
-#SET(ZLIB_LIBRARY_DEBUG ${FBX_ROOT}/lib/vs2015/x64/debug/zlib-md.lib)
-#SET(ZLIB_LIBRARY_RELEASE ${FBX_ROOT}/lib/vs2015/x64/release/zlib-md.lib)
+SET(ZLIB_LIBRARY_DEBUG ${FBX_ROOT}/lib/vs2017/x64/debug/zlib-md.lib)
+SET(ZLIB_LIBRARY_RELEASE ${FBX_ROOT}/lib/vs2017/x64/release/zlib-md.lib)
 #
 #message(FLOPPATY1)
 #message(${FBX_XML2_LIBRARY})
@@ -286,7 +288,7 @@ ENDIF()
 #    ENDIF()
 #ENDIF()
 
-# TODO (Zohar): I really think we can pu most of it in the general pasrt and the final compilation with the windows part, talk to me!
+# TODO (Zohar): I really think we can put most of it in the general part and the final compilation with the windows part, talk to me!
 #IF(NOT FBX_FOUND) # TODO: TOMER My addition 20201005_1830
 #linking the sdk in unix
 IF(UNIX)
@@ -395,8 +397,13 @@ IF(WIN32)
         #TODO need to create multiple code snippets to create a target for each fbx library file, also needed in windowns for relocatable lib
         SET_TARGET_PROPERTIES(FBX::fbx PROPERTIES INTERFACE_INCLUDE_DIRECTORIES "${FBX_INCLUDE_DIR}")
         SET_TARGET_PROPERTIES(FBX::fbx PROPERTIES IMPORTED_LOCATION "${FBX_LIBRARY}")
-#                SET_TARGET_PROPERTIES(FBX::fbx PROPERTIES IMPORTED_LINK_INTERFACE_LIBRARIES "${LIBXML2_LIBRARY_RELEASE};${ZLIB_LIBRARY_RELEASE}") # TODO we don't need it in 2019 version
-        #                TARGET_LINK_LIBRARIES(FBX::fbx INTERFACE ${LIBXML2_LIBRARY_DEBUG} ${ZLIB_LIBRARY_DEBUG})
+
+        #TODO for Alice's computer specifically for some reason
+        SET(LIBXML2_LIBRARY "C:/Program Files/Autodesk/FBX/FBX SDK/2020.0.1/lib/vs2017/x64/release/libxml2-md.lib")
+        SET(ZLIB_LIBRARY "C:/Program Files/Autodesk/FBX/FBX SDK/2020.0.1/lib/vs2017/x64/release/zlib-md.lib")
+        SET_TARGET_PROPERTIES(FBX::fbx PROPERTIES IMPORTED_LINK_INTERFACE_LIBRARIES "${LIBXML2_LIBRARY_RELEASE};${ZLIB_LIBRARY_RELEASE}")
+
+        # TARGET_LINK_LIBRARIES(FBX::fbx INTERFACE ${LIBXML2_LIBRARY_DEBUG} ${ZLIB_LIBRARY_DEBUG})
         SET_TARGET_PROPERTIES(FBX::fbx PROPERTIES POSITION_INDEPENDENT_CODE TRUE)
         MESSAGE(FBX::fbx=CREATED)
     ENDIF()

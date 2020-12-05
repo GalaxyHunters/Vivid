@@ -54,7 +54,8 @@ message(FBX_FOUND = ${FBX_FOUND}) # TODO
 
 
 #set(PY_ROOT    "C:/Users/zorik/Miniconda2")
-set(PY_ROOT    "C:/Users/Tussbaum/.conda/envs/py27")
+set(PY_ROOT    "C:/Program Files/Python3")
+#set(PY_ROOT    "C:/Users/Tussbaum/.conda/envs/py27")
 #find_package(PythonLibsNew)
 #set(PY_INCLUDE_DIR ${PY_ROOT}/include)
 #set(PY_LINK_LIBS   ${PY_ROOT}/libs)
