@@ -24,7 +24,7 @@ execute_process(
 )
 
 
-#set(BOOST_ROOT "D:/Documents/Alpha/Libraries/boost_1_72_0")         #TODO tidy this up, should not have to specify by hand
+set(BOOST_ROOT "C:/Program Files/boost_1_74_0")         #TODO tidy this up, should not have to specify by hand
 #set(Boost_DEBUG 1)
 find_package(Boost 1.62.0 REQUIRED)
 #find_package(LibXml2 REQUIRED)

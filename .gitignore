@@ -1,5 +1,5 @@
-/cmake-build-debug
-/cmake-build-release
+/cmake-build-debug*
+/cmake-build-release*
 /CMakeFiles
 /temp
 /binding_python_version
@@ -12,3 +12,5 @@
 /Tests/test_wrapper_win_texture.mtl
 /Tests/test_wrapper_win_texture.obj
 /Tests/test_wrapper_win_texture_texture.png
+.idea/inspectionProfiles/
+vivid.exe.manifest
