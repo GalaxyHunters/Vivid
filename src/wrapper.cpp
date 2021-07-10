@@ -11,6 +11,8 @@ using namespace vivid;
 
 namespace py = pybind11;
 
+// TODO: add more relvant functions
+// TODO: Should use py conventions here...
 PYBIND11_MODULE(vivid_py, m) {
     py::class_<CSurface>(m, "CSurface")
             .def(py::init<vector<vector<double >>, vector<bool>, vector<coord_t>, coord_t, coord_t>(), "constructor function for surf",
@@ -28,10 +30,8 @@ PYBIND11_MODULE(vivid_py, m) {
             .def("ExportToObj", &CMesh::ExportToObj,  "writes the surface to an OBJ file, by materials or textures", py::arg("aOutputFile"), py::arg("WithTexture") = 1); //TODO make sure it sent as True to the bool param
     py::class_<CModel>(m, "CModel")
             .def(py::init<> (), "default constructor for CModel")
-            .def(py::init<vector<CMesh> > (), "constructor for CModel, from meshes", py::arg("Meshes"))
-            .def(py::init<vector<CSurface>, string, coord_t> (), "constructor for CModel, from surfs", py::arg("Surfs"), py::arg("label") = "VIVID_3D_MODEL", py::arg("alpha") = 1)
+            .def(py::init<vector<CMesh>, std::string> (), "constructor for CModel, from meshes", py::arg("Meshes"), py::arg("Label"))
             .def("AddMesh", &CModel::AddMesh, "add another mesh to Model", py::arg("Mesh"))
-            .def("AddSurf", &CModel::AddSurf, "add another mesh to model, using surf", py::arg("surf"), py::arg("label") = "VIVID_3D_MODEL", py::arg("alpha") = 1)
             .def("ExportToObj", &CModel::ExportToObj,  "writes the surface to an OBJ file, by materials or textures", py::arg("aOutputFile"), py::arg("WithTexture") = 1); //TODO make sure it sent as True to the bool param
     m.def("Animate", &Animate, "Takes a numpy array of CModels, an output location and an interval and creates a FBX animation containing a model in each frame",
           py::arg("Models"),py::arg("Interval"), py::arg("OutputFile"));

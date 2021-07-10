@@ -15,22 +15,22 @@ private:
     std::vector<CMesh> mMeshes = {}; //TODO ModelComponent refactor
 
 public:
-    // TODO Think! should we pass param by reference? should we use const?
+
     // Should we have surfaces here? in what way? is there a better way that is still easy to the user?
     CModel(){};
-	CModel(CMesh aMesh) {mMeshes.push_back(aMesh);};
-    //operator =
-	CModel(std::vector<CMesh> aMeshes) : mMeshes(aMeshes){};
-	CModel(std::vector<CSurface> aSurfs, std::string aLabel, coord_t aAlpha);
-	~CModel();
+    CModel(const std::vector<CMesh>& arMeshes, const std::string& arLabel) : mMeshes(arMeshes), mLabel(arLabel){};
+	CModel(const CMesh& arMesh) {mMeshes.push_back(arMesh);};
+    inline CModel& operator= (const CModel& arModel) { mMeshes = arModel.mMeshes, mLabel = arModel.mLabel;  return *this; }
+	~CModel(){};
 
-	void AddMesh(CMesh aMesh);
-	//remove Mesh?
-	void AddSurf(CSurface aSurf, std::string aLabel, coord_t aAlpha);
-	vector<CMesh> GetMeshes() {return mMeshes;}
+	inline void AddMesh(const CMesh& arMesh){mMeshes.push_back(arMesh);};
+    inline void AddMeshes (const std::vector<CMesh>& arMeshes){mMeshes.insert(mMeshes.end(), arMeshes.begin(), arMeshes.end() );};
+    inline void Concatenate (const CModel& arModel){mMeshes.insert(mMeshes.end(), arModel.mMeshes.begin(), arModel.mMeshes.end() );};
+	//TODO remove Mesh??
+	inline const vector<CMesh>& GetMeshes() {return mMeshes;}
 
 	// Add Importers
-    void ExportToObj(std::string aOutput, bool WithTexture = 1); //TODO const std::string &aOutputFilePath
+    void ExportToObj(std::string aOutput, bool WithTexture = 1); //TODO const std::string &arOutputFilePath
 //    void ExportToFBX(rotation bla bla, bool WithTexture = 1);
 
     //TODO export to BLOB

@@ -509,6 +509,11 @@ void CSurface::PreProcessPoints() {
     mScale = FindContainingRadius(mInputPoints) / PARTICLE_SCALE_MAGNITUDE;
     vector<CPoint> noise_vec (mInputPoints.size());
     srand(time(0));
+
+//
+//    generate(V.begin(), V.end(), rand); // TODO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
+//
+
     for (int i = 0; i<noise_vec.size(); i++){
         noise_vec[i] = {NOISE_PERCENTAGE*((2 * mCenVector.X() * rand() / RAND_MAX) - mCenVector.X()),
                         NOISE_PERCENTAGE*((2 * mCenVector.Y() * rand() / RAND_MAX) - mCenVector.Z()),
