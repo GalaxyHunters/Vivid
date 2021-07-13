@@ -93,7 +93,7 @@ add_executable(vivid
         src/Extra/Analysis.h
 
         #main
-        src/main.cpp )
+        src/main.cpp src/ModelBuilder/SmartDecimator.cpp src/ModelBuilder/SmartDecimator.h)
 
 
 
